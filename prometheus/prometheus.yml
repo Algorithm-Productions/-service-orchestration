@@ -60,13 +60,13 @@ scrape_configs:
       - targets: [ 'graphite-exporter:9108' ]
 
 
-  - job_name: 'wmi-exporter'
+  - job_name: 'wmi_exporter'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
     static_configs:
-      - targets: [ '100.71.176.21:9182', #   teddesktop
+      - targets: ['100.71.176.21:9182', #   teddesktop
                    '100.67.169.126:9182', #  algostudio1
                    '100.105.245.16:9182', #  clarissa-pc
                    '100.72.64.81:9182', #    conor
@@ -76,4 +76,4 @@ scrape_configs:
                    '100.119.91.25:9182', #   dillon-desktop
                    '100.102.93.41:9182', #   james-pc
                    '100.70.113.71:9182', #   studio-james
-                   '100.121.206.14:9182' ] #  the-apostle
+                   '100.121.206.14:9182'] #  the-apostle

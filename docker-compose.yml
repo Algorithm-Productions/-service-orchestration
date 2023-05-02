@@ -105,9 +105,9 @@ services:
     volumes:
       - ./graphite-exporter/graphite_mapping.conf:/tmp/graphite_mapping.conf
     ports:
-      - '9108:9108'
-      - '9109:9109'
-      - '9109:9109/udp'
+      - "${GRAPHITE_PORT_1:-9108}:9108"
+      - "${GRAPHITE_PORT_2:-9109}:9109"
+      - "${GRAPHITE_PORT_2:-9109}:9109/udp"
     restart:
       always
          

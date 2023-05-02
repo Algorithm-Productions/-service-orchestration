@@ -6,12 +6,12 @@
         description: Uptime Kuma
         icon: uptimekuma.png
         href: http://algo-web:3001
-        ping: http://uptime_kuma:3001
+        ping: http://uptime-kuma:3001
         server: my-docker
         container: uptime_kuma
         widget:
             type: uptimekuma
-            url: http://uptime_kuma:3001
+            url: http://uptime-kuma:3001
             slug: statuspageslug
 
     - Speedtest:

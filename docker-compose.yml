@@ -98,6 +98,7 @@ services:
     restart: always
 
   graphite-exporter:
+    container_name: graphite-exporter
     image: prom/graphite-exporter
     command:
       - '--graphite.mapping-config=/tmp/graphite_mapping.conf'

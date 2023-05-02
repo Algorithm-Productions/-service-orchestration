@@ -45,7 +45,7 @@
             type: grafana
             url: http://grafana:3000
             username: admin
-            password: admin
+            password: AlgoPass5
 
     - Prometheus:
         description: Prometheus

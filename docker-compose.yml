@@ -6,7 +6,6 @@ networks:
 volumes:
   prometheus_data: { }
   grafana_data: { }
-  uptime_kuma_data: { }
 
 services:
 
@@ -22,11 +21,23 @@ services:
       monitoring:
       default:
 
+  dockerproxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    container_name: dockerproxy
+    environment:
+      - CONTAINERS=1    # Allow access to viewing containers
+      - POST=0          # Disallow any POST operations (effectively read-only)
+    ports:
+      - '${DOCKERPROXY_PORT:-2375}:2375'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
+    restart: unless-stopped
+
   uptime-kuma:
     image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
     volumes:
-      - uptime_kuma_data:/app/data
+      - ./uptime_kuma/data:/app/data
     ports:
       - '${UPTIME_KUMA_PORT:-3001}:3001'
     restart: always

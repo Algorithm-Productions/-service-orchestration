@@ -1,10 +1,36 @@
 version: '3'
 
+networks:
+  monitoring: { }
+
 volumes:
-    prometheus_data: {}
-    grafana_storage: {}
+  prometheus_data: { }
+  grafana_data: { }
+  uptime_kuma_data: { }
 
 services:
+
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    ports:
+      - '${HOMEPAGE_PORT:-3000}:3000'
+    volumes:
+      - ./homepage/config:/app/config                # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+    networks:
+      monitoring:
+      default:
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    volumes:
+      - uptime_kuma_data:/app/data
+    ports:
+      - '${UPTIME_KUMA_PORT:-3001}:3001'
+    restart: always
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -48,7 +74,6 @@ services:
     ports:
       - 9100:9100
     restart: always
-       
 
   cadvisor:
     image: google/cadvisor
@@ -74,3 +99,21 @@ services:
     restart:
       always
          
+  speedtest:
+    container_name: speedtest
+    image: henrywhitaker3/speedtest-tracker
+    ports:
+      - '${SPEEDTEST_PORT:-8765}:80'
+    volumes:
+      - /path/to/data:/config
+    environment:
+      - TZ=Europe/Dublin
+      - PGID=
+      - PUID=
+      - OOKLA_EULA_GDPR=true
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "200k"
+    restart: unless-stopped

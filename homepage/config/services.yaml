@@ -8,7 +8,7 @@
         href: http://algo-web:3001
         ping: http://uptime-kuma:3001
         server: my-docker
-        container: uptime_kuma
+        container: uptime-kuma
         widget:
             type: uptimekuma
             url: http://uptime-kuma:3001

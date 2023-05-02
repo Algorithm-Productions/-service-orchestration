@@ -1,0 +1,18 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/bookmarks
+
+- Developer:
+    - Algorithm Github:
+        - abbr: GH
+          href: https://github.com/Algorithm-Productions
+
+- Project:
+    - Coda:
+        - abbr: coda.io
+          href: https://coda.io/workspaces/ws-8pEHfWgZv9/docs
+
+- Entertainment:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
